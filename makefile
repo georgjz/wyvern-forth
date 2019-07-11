@@ -17,10 +17,12 @@ VPATH = $(SRCDIR)
 
 .PHONY: clean
 
-mumu: main.o subroutine.o
+# mumu: $(OBJDIR)/main.o subroutine.o
+mumu: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o
+	$(LD) $(LDFLAGS) -o $(BUILDDIR)/test.rom $?
 
-%.o: %.s
-	$(AS) $(ASFLAGS) -l$(OBJDIR)/$*.list -o obj/$@ $<
+$(OBJDIR)/%.o: %.s
+	$(AS) $(ASFLAGS) -l$*.list -o $@ $<
 
 clean:
 	rm -f $(OBJDIR)/*.o $(OBJDIR)/*.list
