@@ -3,3 +3,5 @@
 *.rom
 *.hex
 */*.o
+*.out
+*.list
