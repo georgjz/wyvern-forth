@@ -1,7 +1,7 @@
 # object files
+obj/
 *.o
 *.rom
 *.hex
-*/*.o
 *.out
 *.list

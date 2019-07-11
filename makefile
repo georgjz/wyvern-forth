@@ -1,5 +1,7 @@
 # Simple make file to build a 6809 project with lwtools
 
+VPATH = src
+
 .PHONY: clean
 
 mumu: main.o subroutine.o
