@@ -1,0 +1,45 @@
+                      (           test.s):00001         ; simple forth test 
+                      (           test.s):00002         
+0000                  (           test.s):00003         Next macro 
+                      (           test.s):00004             jmp     [,Y++]
+                      (           test.s):00005             endm
+                      (           test.s):00006         
+                      (           test.s):00007         
+                      (           test.s):00008             org $0000
+0000                  (           test.s):00009         Start:
+0000 10CE1000         (           test.s):00010             lds     #$1000
+0004 CE2000           (           test.s):00011             ldu     #$2000
+0007 10BE000D         (           test.s):00012             ldy     ColdStart
+                      (           test.s):00013             Next
+000B 6EB1             (             Next):00001             jmp     [,Y++]
+                      (           test.s):00014         
+000D                  (           test.s):00015         ColdStart:
+000D 5000             (           test.s):00016             .word   Two 
+000F FFFF             (           test.s):00017             .word   $ffff
+                      (           test.s):00018         
+                      (           test.s):00019             org $3000
+3000                  (           test.s):00020         Docol:
+3000 3420             (           test.s):00021             pshs    Y
+3002 1F20             (           test.s):00022             tfr     Y,D 
+3004 C30002           (           test.s):00023             addd    #$02 
+3007 1F02             (           test.s):00024             tfr     D,Y
+                      (           test.s):00025             Next 
+3009 6EB1             (             Next):00001             jmp     [,Y++]
+                      (           test.s):00026         
+                      (           test.s):00027         
+                      (           test.s):00028             org $4000 
+4000                  (           test.s):00029         Lit:
+4000 ECB1             (           test.s):00030             ldd     [,Y++]
+4002 3406             (           test.s):00031             pshs    D 
+                      (           test.s):00032             Next 
+4004 6EB1             (             Next):00001             jmp     [,Y++]
+                      (           test.s):00033         
+                      (           test.s):00034         
+                      (           test.s):00035             org $5000 
+5000                  (           test.s):00036         Two: 
+5000 4000             (           test.s):00037             .word Lit 
+5002 0002             (           test.s):00038             .word 2 
+5004 4000             (           test.s):00039             .word Lit 
+5006 0004             (           test.s):00040             .word 4 
+                      (           test.s):00041             Next
+5008 6EB1             (             Next):00001             jmp     [,Y++]
