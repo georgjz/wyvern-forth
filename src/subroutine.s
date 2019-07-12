@@ -1,7 +1,7 @@
 ; test subroutine
 TestSubroutine export 
 
-    section mumu
+    section subroutine
 
 TestSubroutine:
     lda     $0001

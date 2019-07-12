@@ -2,12 +2,13 @@
 
 TestSubroutine IMPORT 
 
-    section mumu
+    section main
 
 Main:
     lda     #$04
-    sta     $0001
-    lda     1234
-    lda     %101011
+    jsr     TestSubroutine
+    ; sta     $0001
+    ; lda     1234
+    ; lda     %101011
 
     endsection

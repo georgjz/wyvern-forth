@@ -1,6 +1,7 @@
 # object files
 build/
 obj/
+roms/
 *.o
 *.rom
 *.hex

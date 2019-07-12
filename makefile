@@ -6,7 +6,7 @@ ASFLAGS := --obj
 
 # Linker flags 
 LD 		:= lwlink
-LDFLAGS	:= --raw 
+LDFLAGS	:= --raw -s linkscript.cfg
 
 # Directories 
 BUILDDIR := build
@@ -18,11 +18,11 @@ VPATH = $(SRCDIR)
 .PHONY: clean
 
 # mumu: $(OBJDIR)/main.o subroutine.o
-mumu: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o
-	$(LD) $(LDFLAGS) -o $(BUILDDIR)/test.rom $?
+mumu: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o $(OBJDIR)/vector.o
+	$(LD) $(LDFLAGS) -o $(BUILDDIR)/test3.rom $?
 
 $(OBJDIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -l$*.list -o $@ $<
 
 clean:
-	rm -f $(OBJDIR)/*.o $(OBJDIR)/*.list
+	rm -f $(OBJDIR)/*.o $(OBJDIR)/*.list $(BUILDDIR)/*
