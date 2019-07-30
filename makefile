@@ -18,7 +18,7 @@ VPATH = $(SRCDIR)
 .PHONY: clean
 
 # mumu: $(OBJDIR)/main.o subroutine.o
-mumu: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o $(OBJDIR)/vector.o
+mumu: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o # $(OBJDIR)/vector.o
 	$(LD) $(LDFLAGS) -o $(BUILDDIR)/test3.rom $?
 
 $(OBJDIR)/%.o: %.s
