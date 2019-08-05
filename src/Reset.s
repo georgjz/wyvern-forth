@@ -77,7 +77,11 @@ Loop:
     rts 
 
 TestText:
-    .ascii  "WYVERN-FORTH                    " 
-    .ascii  "(C) 2019, GEORG ZIEGLER         "
+    ; .ascii  "WYVERN-FORTH                    " 
+    .ascii  "WYVERN"
+    .db             $6d
+    .ascii           "FORTH                    "
+    .ascii  "(C) 2019, CLC_XCE               "
+
 
     endsection
