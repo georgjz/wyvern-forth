@@ -20,12 +20,9 @@ VPATH = $(SRCDIR)
 .PHONY: clean
 
 # mumu: $(OBJDIR)/main.o subroutine.o
-ROM: $(OBJDIR)/main.o $(OBJDIR)/subroutine.o # $(OBJDIR)/vector.o
-	$(LD) $(LDFLAGS) -o $(BUILDDIR)/test3.srec $?
-	python srec2bin.py -s 0xc000 -e 0x10000 -f 0x00 -o $(BUILDDIR)/wf.ccc $(BUILDDIR)/test3.srec
-
-# ROM: $(OBJDIR)/main.srec
-	# python srec2bin.py -s 0xc000 -e 0x10000 -f 0x00 -o $(BUILDDIR)/wf.ccc $<
+$(BUILDDIR)/wf.ccc: $(OBJDIR)/Reset.o # $(OBJDIR)/subroutine.o # $(OBJDIR)/vector.o
+	$(LD) $(LDFLAGS) -o $(BUILDDIR)/intermediate.srec $?
+	python srec2bin.py -s 0xc000 -e 0x10000 -f 0x00 -o $@ $(BUILDDIR)/intermediate.srec
 
 # $(OBJDIR)/%.srec: %.s
 $(OBJDIR)/%.o: %.s

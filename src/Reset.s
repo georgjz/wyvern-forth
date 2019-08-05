@@ -5,18 +5,22 @@
 NEXT macro [noexpand]
     tfr     Y,D
     jmp     [,Y++]
-endm
+    endm
 
 
 EXIT macro [noexpand]
     pulu    Y
     NEXT 
-endm
+    endm
 
 
-    org $c000
+    section Reset 
 
 Reset:
+    ; reset stack pointers 
+    lds     #$8000              ; set parameter pointer to $8000
+    ldu     #$7000              ; set return pointer to $7000
+    
     ldy     #SQUARE             ; load starting address into IP
     ldd     #$05                ; initial data on stack 
     pshs    D 
@@ -37,9 +41,10 @@ DUP:
     pshs    X
     NEXT
 
+; !BUG 
 MULT:
     puls    D 
-    mul     ,S-- 
+    mul
     pshs    D 
     NEXT 
 
@@ -50,3 +55,4 @@ DOCOL:
     ; NEXT 
     jmp     [,Y++]
 
+    endsection
