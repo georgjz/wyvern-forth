@@ -20,7 +20,7 @@ VPATH = $(SRCDIR)
 .PHONY: clean
 
 # mumu: $(OBJDIR)/main.o subroutine.o
-$(BUILDDIR)/wf.ccc: $(OBJDIR)/Reset.o # $(OBJDIR)/subroutine.o # $(OBJDIR)/vector.o
+$(BUILDDIR)/wf.ccc: $(OBJDIR)/Reset.o $(OBJDIR)/CoreWords.o # $(OBJDIR)/vector.o
 	$(LD) $(LDFLAGS) -o $(BUILDDIR)/intermediate.srec $?
 	python srec2bin.py -s 0xc000 -e 0x10000 -f 0x00 -o $@ $(BUILDDIR)/intermediate.srec
 
