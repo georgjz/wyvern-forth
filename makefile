@@ -22,7 +22,7 @@ VPATH = $(SRCDIR)
 # mumu: $(OBJDIR)/main.o subroutine.o
 # mumu: $(OBJDIR)/main.o # $(OBJDIR)/subroutine.o # $(OBJDIR)/vector.o
 	# $(LD) $(LDFLAGS) -o $(BUILDDIR)/test3.rom $?
-ROM: $(OBJDIR)/main.srec
+ROM: $(OBJDIR)/Reset.srec
 	python srec2bin.py -s 0xc000 -e 0x10000 -f 0x00 -o $(BUILDDIR)/wf.ccc $<
 
 $(OBJDIR)/%.srec: %.s
