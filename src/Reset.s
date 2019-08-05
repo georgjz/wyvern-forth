@@ -21,6 +21,12 @@ Reset:
     lds     #$8000              ; set parameter pointer to $8000
     ldu     #$7000              ; set return pointer to $7000
     
+    ; GRAPHICS TEST 
+    jsr     WriteTest
+
+EndLoop:
+    jmp     EndLoop
+    
     ldy     #SQUARE             ; load starting address into IP
     ldd     #$05                ; initial data on stack 
     pshs    D 
@@ -33,6 +39,7 @@ SQUARE:
     .word   DOCOL 
     .word   DUP 
     .word   MULT
+    .word   LOOP
     EXIT
 
 DUP:
@@ -54,5 +61,23 @@ DOCOL:
     tfr     D,Y 
     ; NEXT 
     jmp     [,Y++]
+
+LOOP:
+    jmp     LOOP
+
+
+WriteTest:
+    ldx     #$0000
+Loop: 
+    lda     TestText,X 
+    sta     $0400,X
+    leax    1,X
+    cmpx    #$40
+    blt     Loop
+    rts 
+
+TestText:
+    .ascii  "WYVERN-FORTH                    " 
+    .ascii  "(C) 2019, GEORG ZIEGLER         "
 
     endsection
