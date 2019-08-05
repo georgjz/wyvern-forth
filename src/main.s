@@ -1,14 +1,19 @@
 ; simple build test
 
-TestSubroutine IMPORT 
+; TestSubroutine IMPORT 
 
-    section main
+;    section main
+
+    org $c000
 
 Main:
     lda     #$04
-    jsr     TestSubroutine
+
+Loop:
+    jmp     Loop
+    ; jsr     TestSubroutine
     ; sta     $0001
     ; lda     1234
     ; lda     %101011
 
-    endsection
+;    endsection

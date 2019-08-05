@@ -2,6 +2,8 @@
 build/
 obj/
 roms/
+history/
+__pycache__/
 *.o
 *.rom
 *.hex
