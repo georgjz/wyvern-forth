@@ -22,6 +22,7 @@ COREWORDS_S = 1
 ;   Includes
 ;-------------------------------------------------------------------------------
     include "Macros.inc"
+    include "HeaderlessWords.inc"
 ;-------------------------------------------------------------------------------
 
 ;-------------------------------------------------------------------------------
@@ -35,6 +36,9 @@ KEY         export
 EMIT        export  
 WORD        export  
 TONUMBER    export  
+FIND        export  
+CREATE      export  
+COMMA       export  
 ;-------------------------------------------------------------------------------
 
 ;-------------------------------------------------------------------------------
@@ -51,7 +55,7 @@ TONUMBER    export
 _COLON:
     .word   $ffff               ; Top-most word
     .ascii  ":"                 ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $01
+    .byte   LENMASK & $01
 COLON:
     .word   EXIT 
 ;---- End of COLON word --------------------------------------------------------
@@ -64,7 +68,7 @@ COLON:
 _QUIT:
     .word   _COLON              ; link to previous word
     .ascii  "QUIT"              ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $04
+    .byte   LENMASK & $04
 QUIT:
     .word   EXIT 
 ;---- End of QUIT word ---------------------------------------------------------
@@ -77,7 +81,7 @@ QUIT:
 _EXIT:
     .word   _QUIT               ; link to previous word
     .ascii  "EXIT"              ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $04
+    .byte   LENMASK & $04
 EXIT:
     pulu    Y                   ; restore old IP
     Next                        ; continue with next word
@@ -91,7 +95,7 @@ EXIT:
 _LITERAL:
     .word   _EXIT               ; link to previous word
     .ascii  "LITERAL"           ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $06
+    .byte   LENMASK & $06
 LITERAL:
     .word   EXIT 
 ;---- End of LITERAL word ------------------------------------------------------
@@ -104,7 +108,7 @@ LITERAL:
 _KEY:
     .word   _LITERAL            ; link to previous word
     .ascii  "KEY"               ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $03
+    .byte   LENMASK & $03
 KEY:
     .word   EXIT 
 ;---- End of KEY word ----------------------------------------------------------
@@ -117,7 +121,7 @@ KEY:
 _EMIT:
     .word   _KEY                ; link to previous word
     .ascii  "EMIT"              ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $04
+    .byte   LENMASK & $04
 EMIT:
     .word   EXIT 
 ;---- End of EMIT word ---------------------------------------------------------
@@ -130,7 +134,7 @@ EMIT:
 _WORD:
     .word   _EMIT               ; link to previous word
     .ascii  "WORD"              ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $04
+    .byte   LENMASK & $04
 WORD:
     .word   EXIT 
 ;---- End of WORD word ---------------------------------------------------------
@@ -143,10 +147,49 @@ WORD:
 _TONUMBER:
     .word   _WORD               ; link to previous word
     .ascii  ">NUMBER"           ; name
-    .byte   IMMEDF & HIDDENF & LENMASK & $07
+    .byte   LENMASK & $07
 TONUMBER:
     .word   EXIT 
 ;---- End of TONUMBER word -----------------------------------------------------
+
+;-------------------------------------------------------------------------------
+;   Word: "FIND", FIND
+;   Description: Finds the address of a word in the dictionary
+;-------------------------------------------------------------------------------
+; header
+_FIND:
+    .word   _TONUMBER           ; link to previous word
+    .ascii  "FIND"              ; name
+    .byte   LENMASK & $04
+FIND:    
+    .word   EXIT 
+;---- End of FIND word ---------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+;   Word: "CREATE", CREATE
+;   Description: Create a new dictionary entry
+;-------------------------------------------------------------------------------
+; header
+_CREATE:
+    .word   _FIND               ; link to previous word
+    .ascii  "CREATE"            ; name
+    .byte   LENMASK & $06
+FIND:    
+    .word   EXIT 
+;---- End of CREATE word -------------------------------------------------------
+
+;-------------------------------------------------------------------------------
+;   Word: ",", COMMA 
+;   Description: 
+;-------------------------------------------------------------------------------
+; header
+_COMMA:
+    .word   _CREATE             ; link to previous word
+    .ascii  ","                 ; name
+    .byte   LENMASK & $01
+COMMA:   
+    .word   EXIT 
+;---- End of COMMA word --------------------------------------------------------
 
     ; dummy file
 

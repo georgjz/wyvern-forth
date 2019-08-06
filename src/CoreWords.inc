@@ -29,6 +29,9 @@ KEY         import
 EMIT        import  
 WORD        import  
 TONUMBER    import  
+FIND        import  
+CREATE      import  
+COMMA       import 
 ;-------------------------------------------------------------------------------
 
     endc

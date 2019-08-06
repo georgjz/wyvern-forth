@@ -21,14 +21,7 @@ HEADERLESSWORDS_INC = 1
 ;-------------------------------------------------------------------------------
 ;   Imports
 ;-------------------------------------------------------------------------------
-COLON       import              ; line
-QUIT        import  
-EXIT        import  
-LITERAL     import  
-KEY         import  
-EMIT        import  
-WORD        import  
-TONUMBER    import  
+DoCol       import              ; line
 ;-------------------------------------------------------------------------------
 
     endc
