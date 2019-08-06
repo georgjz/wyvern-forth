@@ -7,5 +7,7 @@ link objects:
 
 # Memory Map 
 RAM: $0000 - $7fff
-
-ROM: $c000 - $fff0
+    Start of Dictionary
+    I/O: Keyboard, Graphics
+ROM: $c000 - $feff
+PIA/SAM: $ff00 - $ffff
