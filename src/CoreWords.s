@@ -174,7 +174,7 @@ _CREATE:
     .word   _FIND               ; link to previous word
     .ascii  "CREATE"            ; name
     .byte   LENMASK & $06
-FIND:    
+CREATE:  
     .word   EXIT 
 ;---- End of CREATE word -------------------------------------------------------
 
